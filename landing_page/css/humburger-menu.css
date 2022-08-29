@@ -1,0 +1,103 @@
+.burger-check {
+    display: none;
+}
+
+.burger {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.burger:after {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+}
+
+/*--------------------------------------
+ Creates the look of the burger icon
+ using the inner span and pseudo-elements
+--------------------------------------*/
+.burger span,
+.burger span:before,
+.burger span:after {
+    position: absolute;
+    left: 10px;
+    top: 22px;
+    width: 40px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+}
+
+/* Reset the left and create the pseudo-element */
+.burger span:before,
+.burger span:after {
+    content: '';
+    left: 0;
+}
+
+/* Top bar position */
+.burger span:before {
+    top: -8px;
+}
+
+/* Bottom bar position */
+.burger span:after {
+    top: 8px;
+}
+
+/* Get rid of more on action (IE9 or higher) */
+.burger-check:checked + .burger:after {
+    content: '';
+}
+/* Get rid of the middle bar on action (IE9 or higher) */
+
+.burger-check:checked + .burger span {
+    height: 0;
+    width: 0;
+}
+
+/* Moves the top and bottom bars to the middle on action (IE9 or higher) */
+.burger-check:checked + .burger span:before,
+.burger-check:checked + .burger span:after {
+    top: 6px;
+}
+
+/* Rotates the top bar on action with full browser support (IE9 or higher) */
+.burger-check:checked + .burger span:before {
+    -webkit-transform: rotate(225deg);
+    -ms-transform: rotate(225deg);
+    transform: rotate(225deg);
+}
+
+/* Rotates the bottom bar on action with full browser support (IE9 or higher) */
+.burger-check:checked + .burger span:after {
+    -webkit-transform: rotate(-225deg);
+    -ms-transform: rotate(225deg);
+    transform: rotate(-225deg);
+}
+
+nav .links, nav .buttons {
+    display: none;
+}
+
+#main-nav:checked ~ .links, #main-nav:checked ~ .buttons {
+    display: flex;
+}
+
+
+@media (min-width: 576px) {
+    nav .links, nav .buttons {
+        display: flex;
+    }
+
+    .burger.menu {
+        display: none;
+    }
+}
