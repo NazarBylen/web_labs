@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
     <link rel="stylesheet" href="css/styles.css">
     <title>Explore & Travel</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="img/logo.svg" />
+            <img class="logo" src="img/logo.svg" />
             <nav>
+                <input type="checkbox" name="main-nav" id="main-nav" class="burger-check">
+                <label for="main-nav" class="burger menu"><span></span></label>
                 <ul class="links">
                     <li><a class="active" href="#">Home</a></li>
                     <li><a href="#">Destinations</a></li>
@@ -47,8 +50,8 @@
                         <select name="Date" class="select">
                             <option value="Date">Date</option>
                         </select>
-                        <button class="explore-btn">Explore</button>
                     </div>
+                    <button class="explore-btn">Explore</button>
                 </div>
                 <img src="img/explore-travel.png" />
             </div>
@@ -110,7 +113,7 @@
         </main>
         <footer>
             <div class="logo-and-credits">
-                <img src="img/logo.svg" />
+                <img class="logo" src="img/logo.svg" />
                 <p>©2020 Thousand Sunny. All rights reserved</p>
             </div>
             <div class="line"></div>
