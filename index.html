@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JobHelper Search</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+  <main>
+      <header>
+          <form class="search" id="searchForm">
+              <input type="search" class="input" id="search">
+              <button class="button">Search</button>
+          </form>
+      </header>
+      <div class="content">
+        <div class="sidebar">
+            <form class="sort-by-id" id="sortForm">
+                <button class="button">Sort by Id</button>
+            </form>
+            <div class="line"></div>
+            <div class="total-amount">
+                Total amount
+                <h3>
+                    Total Amount:<span id="totalAmount">0</span>
+                </h3>
+            </div>
+        </div>
+        <div class="info" id="gems"></div>
+      </div>
+  </main>
+</body>
+</html>
