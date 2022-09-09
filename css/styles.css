@@ -112,6 +112,9 @@ header {
 
 .item {
     padding: 2px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .info {

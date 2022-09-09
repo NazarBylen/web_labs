@@ -59,7 +59,7 @@ function renderData(data) {
         mainElement.innerHTML = '<h2>No such result available</h2>';
     } else {
         data.forEach(function (item) {
-            htmlData += `<div class="item"><div class="gem"><div>${item.name}</div><div>${item.carats}</div><div>${item.price}</div></div><a href="edit.html?id=${item.id}" class="edit-button">Edit Item</a><hr></div>`
+            htmlData += `<div class="item"><div class="gem"><div>${item.name}</div><div>${item.carats}</div><div>${item.price}</div></div><a href="edit.html?id=${item.id}" class="edit-button">Edit Item</a><a href="#" class="edit-button" onclick="deleteData(${item.id})">Delete</a><hr></div>`
         })
         mainElement.innerHTML = htmlData
     }
@@ -191,6 +191,17 @@ function createData(editGem) {
         modal.style.display = 'block';
         errTxt.innerText = error;
     }
+}
+
+function deleteData(id) {
+    console.log(id);
+    const data = getData();
+    const deletedData = data.filter(function (item) {
+             return Number(item.id) !== Number(id);
+    })
+    console.log(deletedData);
+    localStorage.setItem('gems', JSON.stringify(deletedData));
+    window.location.reload();
 }
 
 //------------------------
