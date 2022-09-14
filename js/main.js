@@ -147,6 +147,9 @@ function validateData(editGem) {
         if (!editGem.name.length || !editGem.carats || !editGem.price) {
             throw new Error('All fields have to be filled');
         }
+        if (/\s/.test(editGem.name)){
+            throw new Error('All fields have to be filled');
+        }
         return true;
     }
     throw new Error('Something went wrong!')

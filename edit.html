@@ -46,6 +46,11 @@
         };
         editData(editGem);
     });
+    const modalClose = document.getElementById('btn-close')
+    modalClose.addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('modal').style.display = 'none';
+    })
 </script>
 </body>
 </html>
