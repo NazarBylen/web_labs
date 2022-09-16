@@ -1,6 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 
+const gems = require('./gemService')
+const { create } = require("./gemService");
+
 const app = express()
 const port = 3000
 
@@ -9,18 +12,8 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-const fs = require('fs').promises;
-
-async function readFile(filePath) {
-    try {
-        const data = await fs.readFile(filePath);
-        return JSON.parse(data);
-    } catch (error) {
-        throw new Error(`Got an error trying to read the file: ${filePath}`);
-    }
-}
-
 app.use(cors())
+app.use(express.json());
 app.get('*', cors(corsOptions))
 app.post('*', cors(corsOptions))
 app.patch('*', cors(corsOptions))
@@ -28,7 +21,7 @@ app.delete('*', cors(corsOptions))
 
 app.get('/gems', async (req, res) => {
     try{
-        const data = await readFile("./data.json");
+        const data = await gems.getAll();
         res.status(200).json(data);
     } catch (error){
         console.log(error);
@@ -36,7 +29,24 @@ app.get('/gems', async (req, res) => {
             body: error.message,
         });
     }
+})
 
+app.post('/gems', async (req, res) => {
+    console.log(req.body);
+    const data = await gems.create(req);
+    res.status(200).json(data);
+})
+
+app.patch('/gems/:id', async (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+    const data = await gems.update(req)
+    res.status(200).json(data);
+})
+
+app.delete('/gems/:id', async (req, res) => {
+    await gems.remove(req);
+    res.status(204).json({method:"remove"});
 })
 
 app.listen(port, () => {
