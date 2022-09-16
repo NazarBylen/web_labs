@@ -42,8 +42,15 @@ if (!gemsInStorage) {
     localStorage.setItem('gems', JSON.stringify(gems));
 }
 
-function getData() {
-    return gemsInStorage ? JSON.parse(gemsInStorage) : gems;
+function fetchData(){
+    return fetch("http://localhost:3000/gems")
+}
+
+async function getData() {
+    const response = await fetchData();
+    const data = await response.json();
+    console.log(data.data);
+    return data.data;
 }
 
 function renderTotalAmount(totalAmount) {
@@ -54,7 +61,6 @@ function renderTotalAmount(totalAmount) {
 function renderData(data) {
     let htmlData = '';
     const mainElement = document.getElementById('gems');
-    console.log(mainElement);
     if (!data.length) {
         mainElement.innerHTML = '<h2>No such result available</h2>';
     } else {
@@ -77,14 +83,15 @@ function search(event) {
 
     if (!searchText.length) return;
 
-    const data = getData();
-    const results = data.filter(function (item) {
-        const itemName = item.name.toLowerCase();
-        return itemName.includes(searchText.toLowerCase());
-    });
+    getData().then((data)=>{
+        const results = data.filter(function (item) {
+            const itemName = item.name.toLowerCase();
+            return itemName.includes(searchText.toLowerCase());
+        });
 
-    renderData(results);
-    renderTotalAmount(getTotalAmount(results))
+        renderData(results);
+        renderTotalAmount(getTotalAmount(results))
+    });
 }
 
 function comparator(field = 'carats') {
@@ -101,12 +108,12 @@ function comparator(field = 'carats') {
 
 function sortBy(event) {
     event.preventDefault();
-    const data = getData();
+    const data = getData().then((data)=>{
+        const sortedData = data.sort(comparator());
 
-    const sortedData = data.sort(comparator());
-
-    renderData(sortedData);
-    renderTotalAmount(getTotalAmount(sortedData))
+        renderData(sortedData);
+        renderTotalAmount(getTotalAmount(sortedData))
+    });
 }
 
 function getQueryParam(name) {

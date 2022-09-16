@@ -32,11 +32,10 @@
 </main>
 </body>
 <script defer>
-    const data = getData();
-    console.log(getTotalAmount(data));
-    renderData(data);
-    renderTotalAmount(getTotalAmount(data))
-
+    getData().then((data)=>{
+        renderData(data);
+        renderTotalAmount(getTotalAmount(data))
+    });
     const searchForm = document.getElementById("searchForm");
     const sortForm = document.getElementById("sortForm");
     searchForm.addEventListener('submit', search);
