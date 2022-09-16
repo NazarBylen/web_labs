@@ -38,7 +38,6 @@ app.post('/gems', async (req, res) => {
 })
 
 app.patch('/gems/:id', async (req, res) => {
-    console.log(req.params);
     console.log(req.body);
     const data = await gems.update(req)
     res.status(200).json(data);

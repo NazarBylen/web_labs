@@ -1,47 +1,3 @@
-const gems = [
-    {
-        id: 1,
-        name: 'Сапфір',
-        carats: 5,
-        price: 16000
-    },
-    {
-        id: 2,
-        name: 'Агат',
-        carats: 3,
-        price: 400
-    },
-    {
-        id: 3,
-        name: 'Діамант',
-        carats: 1,
-        price: 38600
-    },
-    {
-        id: 4,
-        name: 'Рубін',
-        carats: 1,
-        price: 1500
-    },
-    {
-        id: 5,
-        name: 'Рубін круглий',
-        carats: 1,
-        price: 1500
-    },
-    {
-        id: 6,
-        name: 'Аметист',
-        carats: 2,
-        price: 2300
-    },
-];
-
-const gemsInStorage = localStorage.getItem('gems')
-if (!gemsInStorage) {
-    localStorage.setItem('gems', JSON.stringify(gems));
-}
-
 function fetchData(){
     return fetch("http://localhost:3000/gems")
 }
@@ -65,7 +21,7 @@ function renderData(data) {
         mainElement.innerHTML = '<h2>No such result available</h2>';
     } else {
         data.forEach(function (item) {
-            htmlData += `<div class="item"><div class="gem"><div>${item.name}</div><div>${item.carats}</div><div>${item.price}</div></div><a href="edit.html?id=${item.id}" class="edit-button">Edit Item</a><a href="#" class="edit-button" onclick="deleteData(${item.id})">Delete</a><hr></div>`
+            htmlData += `<div class="item"><div class="gem"><div>${item.name}</div><div>${item.carats}</div><div>${item.price}</div></div><a href="edit.html?id=${item.id}" class="edit-button">Edit Item</a><a href="#" class="edit-button" onclick="deleteData('${item.id}')">Delete</a><hr></div>`
         })
         mainElement.innerHTML = htmlData
     }
@@ -122,9 +78,9 @@ function getQueryParam(name) {
     return queryParam.searchParams.get(name)
 }
 
-function getDataByID() {
+async function getDataByID() {
     const id = getQueryParam('id');
-    const data = getData();
+    const data = await getData();
     const dataById = data.filter(function (item) {
         return Number(item.id) === Number(id);
     })
@@ -132,18 +88,19 @@ function getDataByID() {
 }
 
 function renderDefaultFormData() {
-    const data = getDataByID();
-    if (data) {
-        console.log(data);
-        const id = document.getElementById('id')
-        const name = document.getElementById('name')
-        const carates = document.getElementById('carates')
-        const price = document.getElementById('price')
-        id.value = data.id;
-        name.value = data.name;
-        carates.value = data.carats;
-        price.value = data.price;
-    }
+    getDataByID().then((data) => {
+        if (data) {
+            console.log(data);
+            const id = document.getElementById('id')
+            const name = document.getElementById('name')
+            const carates = document.getElementById('carates')
+            const price = document.getElementById('price')
+            id.value = data.id;
+            name.value = data.name;
+            carates.value = data.carats;
+            price.value = data.price;
+        }
+    })
 }
 
 function validateData(editGem) {
@@ -165,16 +122,16 @@ function validateData(editGem) {
 function editData(editGem) {
     try {
         validateData(editGem);
-        const data = getData()
-
-        const editedData = data.map(function (item) {
-            if (Number(item.id) === Number(editGem.id)) {
-                return editGem;
+        fetch(
+            `http://localhost:3000/gems/${editGem.id}`,
+            {
+                method: "PATCH",
+                body: JSON.stringify(editGem),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-            return item
-        })
-        console.log(editedData);
-        localStorage.setItem('gems', JSON.stringify(editedData));
+        )
         window.location.replace('index.html')
     } catch (error) {
         console.log(error);
@@ -187,12 +144,17 @@ function editData(editGem) {
 
 function createData(editGem) {
     try {
-        console.log(editGem);
         validateData(editGem);
-        const data = getData()
-        const createdData = [...data, editGem]
-        console.log(createdData);
-        localStorage.setItem('gems', JSON.stringify(createdData));
+        fetch(
+            `http://localhost:3000/gems`,
+            {
+                method: "POST",
+                body: JSON.stringify(editGem),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
         window.location.replace('index.html')
     } catch (error) {
         console.log(error);
@@ -205,12 +167,12 @@ function createData(editGem) {
 
 function deleteData(id) {
     console.log(id);
-    const data = getData();
-    const deletedData = data.filter(function (item) {
-             return Number(item.id) !== Number(id);
-    })
-    console.log(deletedData);
-    localStorage.setItem('gems', JSON.stringify(deletedData));
+    fetch(
+        `http://localhost:3000/gems/${id}`,
+        {
+            method: "DELETE",
+        }
+    )
     window.location.reload();
 }
 

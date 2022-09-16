@@ -14,7 +14,7 @@ async function getAll() {
 
 async function create(req){
     const {data} = await getAll();
-    const newItem = {id: uuidv4(), ...req.body};
+    const newItem = {...req.body, id: uuidv4() };
     const createdData = {
         data: [...data, newItem]
     }
