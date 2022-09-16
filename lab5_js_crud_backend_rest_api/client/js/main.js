@@ -82,13 +82,15 @@ async function getDataByID() {
     const id = getQueryParam('id');
     const data = await getData();
     const dataById = data.filter(function (item) {
-        return Number(item.id) === Number(id);
+        return item.id === id;
     })
+    console.log(dataById[0]);
     return dataById[0];
 }
 
 function renderDefaultFormData() {
     getDataByID().then((data) => {
+        console.log(data);
         if (data) {
             console.log(data);
             const id = document.getElementById('id')
