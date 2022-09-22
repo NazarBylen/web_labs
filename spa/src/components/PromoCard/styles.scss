@@ -1,0 +1,22 @@
+.promo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #fffcea;
+  border-radius: 70px;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.promoCard{
+  height: 600px;
+}
+
+.texts{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: normal;
+  max-width: 400px;
+  font-size: 15px;
+}
