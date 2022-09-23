@@ -36,7 +36,7 @@ const Home = () => {
                    />
                </div>
            </div>
-           <div className="row">
+           <div className="row justify-content-between">
                {cards.map(item => {
                    return (
                        <div key={item.id} className="col">

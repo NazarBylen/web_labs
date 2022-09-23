@@ -1,6 +1,8 @@
+import './styles.scss'
+
 export const Card = (props) => {
     return (
-        <div className="card" style={{width: '18rem'}}>
+        <div className="card" style={{height: '100%'}}>
             <img src={props.image} className="card-img-top" alt="Card" />
                 <div className="card-body">
                     <h3>{props.title}</h3>

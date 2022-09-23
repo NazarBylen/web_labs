@@ -8,7 +8,7 @@ import logo from '../../../assets/logo.svg'
 export const Footer = () => {
     return (
             <footer>
-                <div className="row gx-5">
+                <div className="row justify-content-between">
                     <div className="col">
                         <div className="subtexts">
                             <h5>Best pizza in Ukraine</h5>
@@ -17,10 +17,10 @@ export const Footer = () => {
                                 for last month</p>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col d-flex justify-content-center">
                         <img src={logo} className="logo"/>
                     </div>
-                    <div className="col">
+                    <div className="col d-flex justify-content-end">
                         <a href="/"><img src={twitter} className="icon"/></a>
                         <a href="/"><img src={youtube} className="icon"/></a>
                         <a href="/"><img src={facebook} className="icon"/></a>

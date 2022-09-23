@@ -1,4 +1,6 @@
-.button{
+.nav-item{
+  text-align: center;
+  min-width: 120px;
   border-radius: 50px;
   border: #D22730 solid 10px;
   background-color: #d22730;
@@ -14,6 +16,9 @@
 }
 
 .navbar{
-  display: flex;
-  justify-content: space-between;
+  gap: 20px;
+  flex-direction: column;
+  @media (min-width: 1200px){
+    flex-direction: row;
+  }
 }

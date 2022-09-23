@@ -2,7 +2,7 @@ import './styles.scss'
 
 export const PromoCard = (props) => {
     return (
-        <div className={"promo"}>
+        <div className="promo">
             <img src={props.image} className="promoCard" alt="PromoCard" />
             <div className="texts">
                 <h1>Доставка до 30хв, або безкоштовно!</h1>

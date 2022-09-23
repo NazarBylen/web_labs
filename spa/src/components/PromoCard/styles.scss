@@ -1,11 +1,14 @@
 .promo{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  background: #fffcea;
+  background: #f5faf3;
   border-radius: 70px;
   align-items: center;
   margin-bottom: 35px;
+  @media (min-width: 1200px){
+    flex-direction: row;
+  }
 }
 
 .promoCard{
@@ -19,4 +22,8 @@
   font-weight: normal;
   max-width: 400px;
   font-size: 15px;
+  margin-bottom: 20px;
+  @media (min-width: 1200px){
+    margin-bottom: 0;
+  }
 }
