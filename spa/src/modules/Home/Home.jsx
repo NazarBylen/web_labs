@@ -1,5 +1,5 @@
 import {Card} from '../../components'
-import { PromoCard } from "../../components/PromoCard";
+import { PromoCard } from "../../components";
 import BikePizza from '../../assets/img/BikePizza.png'
 import threePlusOne from '../../assets/img/threePlusOne.png'
 import twentyPercents from '../../assets/img/twentypercents.png'
