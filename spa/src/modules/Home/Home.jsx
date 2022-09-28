@@ -1,5 +1,6 @@
 import {Card} from '../../components'
-import { PromoCard } from "../../components";
+import { Button } from '../../components'
+import { PromoCard } from '../../components';
 import BikePizza from '../../assets/img/BikePizza.png'
 import threePlusOne from '../../assets/img/threePlusOne.png'
 import twentyPercents from '../../assets/img/twentypercents.png'
@@ -48,8 +49,10 @@ const Home = () => {
                        </div>
                    )
                })}
-
            </div>
+            <Button
+                text="View more"
+            />
         </div>
     );
 };
