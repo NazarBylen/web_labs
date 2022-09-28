@@ -1,22 +1,10 @@
-.button{
-  text-align: center;
-  min-width: 120px;
-  border-radius: 50px;
-  border: #D22730 solid 10px;
+.red{
+  border: #D22730 solid 2px;
   background-color: #d22730;
   color: white;
-  text-decoration: none;
-  font-size: large;
-  font-family: ".AppleSystemUIFont", serif;
-  transition: all 150ms ease-in-out;
   &:hover{
-    color: #e8e8e8;
-    box-shadow: 0 0 2px 0 #d22730 inset, 0 0 10px 4px #ff1616;
+    color: #f3f3f3 !important;
+    border: #aa111d solid 2px !important;
+    background-color: #aa111d !important;
   }
-}
-
-.button-wrapper{
-  margin: 25px;
-  display: flex;
-  justify-content: center;
 }

@@ -1,3 +1,4 @@
+import './styles.scss'
 import {Card} from '../../components'
 import { Button } from '../../components'
 import { PromoCard } from '../../components';
@@ -50,9 +51,9 @@ const Home = () => {
                    )
                })}
            </div>
-            <Button
-                text="View more"
-            />
+            <div className="button-wrapper">
+                <Button text="View more" />
+            </div>
         </div>
     );
 };
