@@ -8,6 +8,9 @@ import BikePizza from '../../assets/img/BikePizza.png'
 import threePlusOne from '../../assets/img/threePlusOne.png'
 import twentyPercents from '../../assets/img/twentypercents.png'
 import twoPlusOne from '../../assets/img/twoPlusOne.png'
+import newPizza from '../../assets/img/newPizza.jpg'
+import newPizza2 from '../../assets/img/newPizza2.jpg'
+import newPizza3 from '../../assets/img/newPizza3.jpg'
 
 const cardsData = [
     {
@@ -30,21 +33,21 @@ const cardsData = [
     },
     {
         id: 4,
-        image: threePlusOne,
-        title: '11111Акція 3+1!',
-        desc: 'Замовляй 3 піци та отримай 4-ту в подарунок!',
+        image: newPizza,
+        title: 'нова гостра піца',
+        desc: 'Замовляй 4 таких та отримай 5-ту в подарунок!',
     },
     {
         id: 5,
-        image: twentyPercents,
-        title: '11111-20% за піцу',
-        desc: 'Забирай замовлення та отримуй знижку 20%!',
+        image: newPizza2,
+        title: 'нова піца з овочами',
+        desc: 'у подарунок поїздка в село на город',
     },
     {
         id: 6,
-        image: twoPlusOne,
-        title: '11111Акція 2+1!',
-        desc: 'Замовляй 3 піци та отримуй одну з них безкоштовно!',
+        image: newPizza3,
+        title: 'нова піца з рибним соусом',
+        desc: 'жодна риба не постраждала',
     },
 ];
 
@@ -72,7 +75,6 @@ const Home = () => {
 
     return (
         <div>
-            <div>{from}</div>
            <div className="row">
                <div className="col">
                    <PromoCard
