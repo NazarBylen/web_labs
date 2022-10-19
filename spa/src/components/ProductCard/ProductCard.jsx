@@ -8,8 +8,9 @@ export const ProductCard = (props) => {
             <div className="title">{ props.name }</div>
             <div className="description">{ props.desc }</div>
             <div className="properties"><span className="price">{ props.price } грн</span> / <span>{ props.weight } г.</span></div>
+            <div className="description">{ props.type }</div>
             <div className="button-wrap">
-                <Button text="Замовити"/>
+                <Button handleClick={props.handleClick} text="Замовити"/>
             </div>
         </div>
     )
