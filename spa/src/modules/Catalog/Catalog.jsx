@@ -1,11 +1,13 @@
-import {useContext, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useNavigate } from "react-router-dom"
-import {ProductsContext} from '../../context/ProductsContext'
-import { ProductCard, Filter, Button, Search } from '../../components'
+import {ProductCard, Filter, Search, Loader} from '../../components'
+import {getCatalogItems, getItem} from '../../api'
+
+const products = [];
 
 const Catalog = () => {
     const [searchValue, setSearchValue] = useState('')
-    const {products} = useContext(ProductsContext);
+    const [loading, setLoading] = useState(false)
     const [localProducts, setLocalProducts] = useState([]);
     const [filters, setFilters] = useState({
         type:'усі',
@@ -19,18 +21,28 @@ const Catalog = () => {
     const handleInputChange = (event) => {
         setSearchValue(event.target.value);
         if(!event.target.value){
-            setLocalProducts(products);
+            getCatalogItems().then((data)=>{
+                setLocalProducts(data.data);
+            })
         }
     }
 
     const handleSearch = () => {
         if (!searchValue.length) return;
-        console.log(searchValue);
-        const results = products.filter((item) => {
-            const itemName = item.name.toLowerCase();
-            return itemName.includes(searchValue.toLowerCase());
-        });
-        setLocalProducts(results);
+        const filtersString = `type:${filters.type};weight:${filters.weight}`
+        const queryParams = {
+            search: searchValue,
+            filters: filtersString
+        }
+
+        setLoading(true)
+        setTimeout(()=>{
+            getCatalogItems(queryParams).then((data)=>{
+                setLocalProducts(data.data);
+            }).finally(()=>{
+                setLoading(false)
+            })
+        }, 1000)
     }
 
     const handleSelectFilter = (event, filterType) => {
@@ -42,29 +54,35 @@ const Catalog = () => {
     }
 
     const handleFilter = () => {
+        const filtersString = `type:${filters.type};weight:${filters.weight}`
+        const queryParams = {filters: filtersString}
+        if(searchValue.length){
+            queryParams['search'] = searchValue;
+        }
 
-            const results = products.filter((item) => {
-                console.log(item.weight, filters.weight);
-                if(filters.type === 'усі' && filters.weight === 'усі'){
-                    return true;
-                }
-                else if(filters.type === 'усі'){
-                    return String(item.weight) === filters.weight;
-                }
-                else if(filters.weight === 'усі'){
-                    return item.type === filters.type
-                }
-                return item.type === filters.type && String(item.weight) === filters.weight;
-            });
-            console.log(results);
-            setLocalProducts(results);
+        setLoading(true)
+        setTimeout(()=>{
+            getCatalogItems(queryParams).then((data)=>{
+                setLocalProducts(data.data);
+            }).finally(()=>{
+                setLoading(false)
+            })
+        }, 1000)
     }
 
     useEffect(()=>{
-        setLocalProducts(products);
-    }, [products])
+        setLoading(true)
+        setTimeout(()=>{
+            getCatalogItems().then((data)=>{
+                console.log(data);
+                setLocalProducts(data.data)
+            }).finally(()=>{
+                setLoading(false)
+            })
+        }, 1000)
+    },[])
 
-    return (
+    return !loading ? (
         <div>
             <div className="row justify-content-between">
                 <div className="row">
@@ -73,23 +91,24 @@ const Catalog = () => {
                     </div>
                 </div>
                 <div className="col">
-                    <Filter handleFilter={handleFilter} handleSelectFilter={handleSelectFilter}/>
+                    <Filter handleFilter={handleFilter} selectedFilters={filters} handleSelectFilter={handleSelectFilter}/>
                 </div>
             </div>
 
             <div className="row justify-content-between">
                 {
-                    localProducts.map((item)=>{
-                        return (
-                            <div className="col m-4" key={item.id}>
-                                <ProductCard {...item} handleClick={() => openItem(item.id)}/>
-                            </div>
-                        )
-                    })
+                    localProducts.length ? localProducts.map((item)=>{
+                            return (
+                                <div className="col m-4" key={item.id}>
+                                    <ProductCard {...item} handleClick={() => openItem(item.id)}/>
+                                </div>
+                            )
+                        }):
+                        (<h3>No results found</h3>)
                 }
             </div>
         </div>
-    )
+    ) : <Loader />
 }
 
 export default Catalog
