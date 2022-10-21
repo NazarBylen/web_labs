@@ -2,10 +2,14 @@ import {Select} from "../Select";
 import {Button} from "../Button";
 
 export const Filter = (props) => {
+    const type = props.selectedFilters.type
+    const weight = props.selectedFilters.weight
     return (
         <div className="row">
             <div className="col">
-                <Select options={
+                <Select
+                    selected={type}
+                    options={
                     [
                         { id:1, name:'усі', },
                         { id:2, name:'м`ясо', },
@@ -15,7 +19,9 @@ export const Filter = (props) => {
                 <label>тип</label>
             </div>
             <div className="col">
-                <Select options={
+                <Select
+                    selected={weight}
+                    options={
                     [
                         { id:1, name:'усі', },
                         { id:2, name:'450', },

@@ -6,3 +6,4 @@ export * from './ProductCard';
 export * from './Select';
 export * from './Search';
 export * from './Filter';
+export * from './Loader';

@@ -3,7 +3,7 @@ const types = {
     vegetables:"'овочі"
 }
 
-export const data = [
+const data = [
     {
         id: "1",
         name: 'Карне',
@@ -59,3 +59,5 @@ export const data = [
         type: 'овочі'
     },
 ]
+
+module.exports = {data};
