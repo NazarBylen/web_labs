@@ -1,0 +1,30 @@
+.pizza{
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: solid #4A4C53;
+    .img{
+        max-height: 100px;
+    }
+    .props{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+    .sign{
+        width: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid rgba(102, 0, 0, 0.64);
+        border-radius: 30%;
+    }
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

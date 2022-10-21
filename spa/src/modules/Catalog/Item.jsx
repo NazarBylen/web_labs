@@ -1,14 +1,22 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 
 import {Button, Loader} from "../../components";
 import {getItem} from '../../api'
+import {cartActions} from '../../store/actions'
 
 const Item = () => {
     const [item, setItem] = useState({})
     const [loading, setLoading] = useState(false)
     const { id } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const addToCart = () => {
+        dispatch(cartActions.addToCart(item));
+    }
+
     const goBack = () => {
         return navigate('/catalog')
     }
@@ -38,7 +46,7 @@ const Item = () => {
                                 <Button text="Go Back" handleClick={goBack} />
                             </div>
                             <div className="col">
-                                <Button text="Add To Cart" />
+                                <Button handleClick={addToCart} text="Add To Cart"/>
                             </div>
                         </div>
                     </div>
